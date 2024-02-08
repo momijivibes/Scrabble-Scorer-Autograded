@@ -26,6 +26,8 @@ const oldPointStructure = {
    10: ['Q', 'Z']
 };
 
+
+
 function oldScrabbleScorer(word) {
    word = word.toUpperCase();
    let letterPoints = "";
@@ -58,6 +60,8 @@ function initialPrompt() {
    // console.log("Old Scrabble Scorer Method:")
    // console.log(oldScrabbleScorer(word));
    console.log(scorerPrompt(word));
+
+   return word;
 };
 
 
@@ -90,24 +94,27 @@ function vowelBonusScorer(word) {
 }
 
 
-let scrabbleScorer;
+let scrabbleScorer;//last step
 
-// organize all three of the scoring options into an array 
+
 const scoringAlgorithms = [
    {
       name: 'Simple Score',
       description: 'Each letter is worth 1 point.',
       scoreFunction: 'A function with a parameter for user input that returns a score.',
+      scorerFunction: simpleScorer
    },
    {
       name: 'Bonus Vowels',
       description: 'Vowels are 3 pts, consonants are 1 pt.',
-      scoreFunction: 'A function that returns a score based on the number or vowels and consonants.'
+      scoreFunction: 'A function that returns a score based on the number or vowels and consonants.',
+      scorerFunction: vowelBonusScorer
    },
    {
       name: 'Scrabble',
       description: 'The traditional scoring algorithm.',
-      scoreFunction: 'Uses the oldScrabbleScorer() function to determine the score for a given word.'
+      scoreFunction: 'Uses the oldScrabbleScorer() function to determine the score for a given word.',
+      scorerFunction: oldScrabbleScorer
    }
 ];
 
@@ -118,28 +125,52 @@ function scorerPrompt(word) {
 
    if (scoringMethod === '0') {
       console.log("algorithm name: ", scoringAlgorithms[0].name);
-      console.log("scoringFunction result: ", scoringAlgorithms[0].scoreFunction(word));
+      console.log("scoringFunction result: ", scoringAlgorithms[0].scorerFunction(word));
    } else if (scoringMethod === '1') {
       console.log("algorithm name: ", scoringAlgorithms[1].name);
-      console.log("scoringFunction result: ", scoringAlgorithms[1].scoreFunction(word));
+      console.log("scoringFunction result: ", scoringAlgorithms[1].scorerFunction(word));
    } else if (scoringMethod === '2') { // Use "else if" here instead of "else"
       console.log("algorithm name: ", scoringAlgorithms[2].name);
-      console.log("scoringFunction result: ", scoringAlgorithms[2].scoreFunction(word));
+      console.log("scoringFunction result: ", scoringAlgorithms[2].scorerFunction(word));
    }
+
 
    return scoringMethod;
 }
 
 
-function transform() { };
+function transform(oldPointStructure) {
+   let newScoreObject = {};
+   for (let key in oldPointStructure) {
+       //console.log(oldPointStructure[key])
+       //save arrays to a variable. (call values), loop through values(arrays) - use forloop on next line - go through each item in array (using i) values[i], 
+       let value = Number(key);
+       let letters = oldPointStructure[key];
+       for (let i = 0; i < letters.length; i++) {
+           let letter = letters[i].toLowerCase();
+           newScoreObject[letter] = value; 
+           //console.log(i)
+           //store in newScore object - value and key - cna't use push for objects - 
+           //object[key] = value //general set up - key and value will be backwards - inverting old and new - 
+           //arrays and loops, objects, output with i = 
 
-let newPointStructure;
+       }
+
+   }
+   return newScoreObject
+};
+
+console.log(transform(oldPointStructure))
+
+
+newPointStructure = transform(oldPointStructure)
+
 
 
 
 function runProgram() {
-   initialPrompt();
-   scorerPrompt();
+   let word = initialPrompt();
+   scorerPrompt(word);
    // let word = initialPrompt();
    // let scoringMethod = 
    // let scorer = scoringAlgorithms[scorerNumb]
