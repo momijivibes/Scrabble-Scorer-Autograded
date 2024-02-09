@@ -27,7 +27,6 @@ const oldPointStructure = {
 };
 
 
-
 function oldScrabbleScorer(word) {
    word = word.toUpperCase();
    let letterPoints = "";
@@ -94,7 +93,9 @@ function vowelBonusScorer(word) {
 }
 
 
-let scrabbleScorer;//last step
+let scrabbleScorer = function(word) {
+
+}
 
 
 const scoringAlgorithms = [
@@ -142,40 +143,31 @@ function scorerPrompt(word) {
 function transform(oldPointStructure) {
    let newScoreObject = {};
    for (let key in oldPointStructure) {
-       //console.log(oldPointStructure[key])
-       //save arrays to a variable. (call values), loop through values(arrays) - use forloop on next line - go through each item in array (using i) values[i], 
        let value = Number(key);
        let letters = oldPointStructure[key];
        for (let i = 0; i < letters.length; i++) {
            let letter = letters[i].toLowerCase();
            newScoreObject[letter] = value; 
-           //console.log(i)
-           //store in newScore object - value and key - cna't use push for objects - 
-           //object[key] = value //general set up - key and value will be backwards - inverting old and new - 
-           //arrays and loops, objects, output with i = 
-
+           //key vs value - make sure - rotating - objects and arrays - 
        }
-
    }
    return newScoreObject
 };
 
+
 console.log(transform(oldPointStructure))
 
 
-newPointStructure = transform(oldPointStructure)
-
-
+let newPointStructure = transform(oldPointStructure)
+// order
 
 
 function runProgram() {
    let word = initialPrompt();
    scorerPrompt(word);
-   // let word = initialPrompt();
-   // let scoringMethod = 
-   // let scorer = scoringAlgorithms[scorerNumb]
-   // scorer.scorerAlg(word);
 }
+
+
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
