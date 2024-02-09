@@ -58,7 +58,7 @@ function initialPrompt() {
    // console.log("")
    // console.log("Old Scrabble Scorer Method:")
    // console.log(oldScrabbleScorer(word));
-   console.log(scorerPrompt(word));
+   //console.log(scorerPrompt(word));
 
    return word;
 };
@@ -74,7 +74,6 @@ function simpleScorer(word) {
    return score;
 
 }
-
 
 function vowelBonusScorer(word) {
    let score = 0;
@@ -92,10 +91,27 @@ function vowelBonusScorer(word) {
 
 }
 
+//like above but altered slightly - change to score = 0;
+//make scorerPrompt available to this  - 
+//this needs to be below 
 
-let scrabbleScorer = function(word) {
+function scrabbleScorer(word) {
+   word = word.toLowerCase();
+   let score = 0; 
 
-}
+   for (let i = 0; i < word.length; i++) {
+      let letter = word[i];
+
+      //console.log(newPointStructure[letter])
+
+      score += newPointStructure[letter]
+
+   }
+
+   return score; 
+};
+
+
 
 
 const scoringAlgorithms = [
@@ -115,10 +131,9 @@ const scoringAlgorithms = [
       name: 'Scrabble',
       description: 'The traditional scoring algorithm.',
       scoreFunction: 'Uses the oldScrabbleScorer() function to determine the score for a given word.',
-      scorerFunction: oldScrabbleScorer
+      scorerFunction: scrabbleScorer
    }
 ];
-
 
 
 function scorerPrompt(word) {
@@ -130,36 +145,37 @@ function scorerPrompt(word) {
    } else if (scoringMethod === '1') {
       console.log("algorithm name: ", scoringAlgorithms[1].name);
       console.log("scoringFunction result: ", scoringAlgorithms[1].scorerFunction(word));
-   } else if (scoringMethod === '2') { // Use "else if" here instead of "else"
+   } else if (scoringMethod === '2') { 
       console.log("algorithm name: ", scoringAlgorithms[2].name);
       console.log("scoringFunction result: ", scoringAlgorithms[2].scorerFunction(word));
    }
-
 
    return scoringMethod;
 }
 
 
 function transform(oldPointStructure) {
-   let newScoreObject = {};
+   let newPointStructure = {};
+
    for (let key in oldPointStructure) {
-       let value = Number(key);
-       let letters = oldPointStructure[key];
-       for (let i = 0; i < letters.length; i++) {
-           let letter = letters[i].toLowerCase();
-           newScoreObject[letter] = value; 
-           //key vs value - make sure - rotating - objects and arrays - 
-       }
+      //define values as the keys
+      let value = Number(key); 
+      let letters = oldPointStructure[key];
+
+      //nested forloop to go through each letter in array. Convert to lower case first. 
+      for (let i = 0; i < letters.length; i++) {
+         let letter = letters[i].toLowerCase();
+         newPointStructure[letter] = value;
+      }
    }
-   return newScoreObject
+   return newPointStructure
 };
 
 
-console.log(transform(oldPointStructure))
 
+//console.log(transform(oldPointStructure))
 
 let newPointStructure = transform(oldPointStructure)
-// order
 
 
 function runProgram() {
