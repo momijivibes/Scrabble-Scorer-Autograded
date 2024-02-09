@@ -135,7 +135,6 @@ const scoringAlgorithms = [
    }
 ];
 
-
 function scorerPrompt(word) {
    let scoringMethod = input.question("\nPlease select a scoring method: \n0 - Simple Score \n1 - Bonus Vowels \n2 - Scrabble \n\nChoose 0, 1, or 2: ");
 
